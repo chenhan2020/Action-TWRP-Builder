@@ -150,7 +150,12 @@ jobs:
     - name: Building recovery
       run: |
         source build/envsetup.sh
-        touch /home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/export_includes
+        if [! -d "/home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/"];then
+          mkdir -p /home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/
+        fi
+        if [! -f "/home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/export_includes"];then
+          touch /home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/export_includes
+        fi
         export ALLOW_MISSING_DEPENDENCIES=true
         export BOARD_BUILD_SYSTEM_ROOT_IMAGE=true
         lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
