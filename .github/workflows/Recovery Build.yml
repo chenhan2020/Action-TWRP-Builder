@@ -150,10 +150,14 @@ jobs:
     - name: Building recovery
       run: |
         source build/envsetup.sh
+        echo Hi!
         if [! -d "/home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/"];then
+          echo target dir missing!
           mkdir -p /home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/
+          echo mkdir successful!
         fi
         if [! -f "/home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/export_includes"];then
+          echo touch export_includes
           touch /home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/export_includes
         fi
         export ALLOW_MISSING_DEPENDENCIES=true
