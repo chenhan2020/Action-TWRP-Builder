@@ -151,15 +151,11 @@ jobs:
       run: |
         source build/envsetup.sh
         echo Hi!
-        if [! -d "/home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/"];then
-          echo target dir missing!
-          mkdir -p /home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/
-          echo mkdir successful!
-        fi
-        if [! -f "/home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/export_includes"];then
-          echo touch export_includes
-          touch /home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/export_includes
-        fi
+        echo target dir missing!
+        mkdir -p /home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/
+        echo mkdir successful!
+        echo touch export_includes
+        touch /home/runner/work/Action-TWRP-Builder/Action-TWRP-Builder/workspace/out/target/product/TB330FU/obj/STATIC_LIBRARIES/bootctrl.mt6768_intermediates/export_includes
         export ALLOW_MISSING_DEPENDENCIES=true
         export BOARD_BUILD_SYSTEM_ROOT_IMAGE=true
         lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
